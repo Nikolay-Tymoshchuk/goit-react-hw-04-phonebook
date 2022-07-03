@@ -9,6 +9,9 @@ export class ContactForm extends Component {
     number: '',
   };
 
+  nameInputIdGenerate = nanoid();
+  numberInputIdGenerate = nanoid();
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -19,8 +22,8 @@ export class ContactForm extends Component {
     e.preventDefault();
     const id = nanoid();
     const { name, number } = this.state;
-    const { createNewContact } = this.props;
-    createNewContact({ id, name, number });
+    const { onSubmit } = this.props;
+    onSubmit({ id, name, number });
     this.setState({
       name: '',
       number: '',
@@ -31,22 +34,24 @@ export class ContactForm extends Component {
     const { name, number } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor={this.nameInputIdGenerate}>Name:</label>
         <br />
         <input
           type="text"
           name="name"
           value={name}
           onChange={this.handleChange}
+          id={this.nameInputIdGenerate}
         />
         <br />
-        <label htmlFor="number">Number:</label>
+        <label htmlFor={this.numberInputIdGenerate}>Number:</label>
         <br />
         <input
           type="text"
           name="number"
           value={number}
           onChange={this.handleChange}
+          id={this.numberInputIdGenerate}
         />
         <br />
         <button type="submit">Add contact</button>
@@ -63,5 +68,5 @@ ContactForm.propTypes = {
       number: PropTypes.string.isRequired,
     })
   ).isRequired,
-  createNewContact: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };

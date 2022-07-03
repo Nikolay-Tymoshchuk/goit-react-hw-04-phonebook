@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types';
-export const ContactList = ({ data }) => {
+export const ContactList = ({ data, onClick }) => {
   return (
     <ul>
       {data.map(contact => (
-        <li key={contact.id}>
+        <li key={contact.id} id={contact.id}>
           {contact.name}: {contact.number}
+          <button type="button" onClick={onClick}>
+            Delete
+          </button>
         </li>
       ))}
     </ul>
@@ -19,4 +22,5 @@ ContactList.propTypes = {
       number: PropTypes.string.isRequired,
     })
   ).isRequired,
+  onClick: PropTypes.func.isRequired,
 };

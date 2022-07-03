@@ -1,23 +1,21 @@
-export const Filter = ({ contacts, filter }) => {
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
+import PropTypes from 'prop-types';
+import { nanoid } from 'nanoid';
+export const Filter = ({ value, onChange }) => {
+  const inputIdGenerate = nanoid();
+  return (
+    <label htmlFor={inputIdGenerate}>
+      Find contacts by name
+      <input
+        type="text"
+        value={value}
+        onChange={onChange}
+        id={inputIdGenerate}
+      />
+    </label>
   );
-  //   return (
-  //     <div>
-  //       <input
-  //         type="text"
-  //         value={filter}
-  //         onChange={e => {
-  //           this.handleFilterChange(e.target.value);
-  //         }}
-  //       />
-  //       <ul>
-  //         {filteredContacts.map(contact => (
-  //           <li key={contact.id}>
-  //             {contact.name}: {contact.number}
-  //           </li>
-  //         ))}
-  //       </ul>
-  //     </div>
-  //   );
+};
+
+Filter.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
