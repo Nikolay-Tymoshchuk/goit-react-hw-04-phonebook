@@ -36,7 +36,9 @@ export const Button = styled.button`
     background-color: inherit;
     color: #fff;
   } */
-
+  margin-top: 10px;
+  display: inline-block;
+  transform: scaleX(0.9);
   cursor: pointer;
   position: relative;
   color: #000;
@@ -55,14 +57,15 @@ export const Button = styled.button`
     letter-spacing: 0.25em;
     background: inherit;
     color: #fff;
-    box-shadow: 0 0 20px var(--clr);
+    box-shadow: 0 0 20px #fff;
+    transform: scaleX(1);
   }
 
   &::before {
     content: '';
     position: absolute;
     inset: 2px;
-    background-color: $color-main;
+    background-color: inherit;
   }
 
   & span {
@@ -82,8 +85,8 @@ export const Button = styled.button`
       top: -3px;
       width: 10px;
       height: 5px;
-      border: 2px solid var(--clr);
-      background: $color-main;
+      border: 2px solid #000;
+      background: #fff;
       transform: translateX(-50%);
       transition: 0.5s;
     }
@@ -95,10 +98,26 @@ export const Button = styled.button`
       bottom: -3.5px;
       width: 10px;
       height: 5px;
-      border: 2px solid var(--clr);
-      background: $color-main;
+      border: 2px solid #000;
+      background: #fff;
       transform: translateX(-50%);
       transition: 0.5s;
     }
+  }
+
+  &:hover i:before {
+    border: 2px solid #fff;
+    background: #000;
+    width: 20px;
+    left: 20%;
+    transform: translateX(-10px);
+  }
+
+  &:hover i:after {
+    border: 2px solid #fff;
+    background: #000;
+    width: 20px;
+    left: 80%;
+    transform: translateX(-10px);
   }
 `;

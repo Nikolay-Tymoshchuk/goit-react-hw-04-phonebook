@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const Container = styled.div`
-  width: 300px;
+  width: 350px;
   height: max-content;
   display: inline-flex;
   flex-direction: column;
@@ -12,7 +12,7 @@ export const Container = styled.div`
   margin-top: 2%;
   color: var(--color-text-primary);
   border-radius: 10px;
-  padding: 8px;
+  padding: 16px;
   box-shadow: 0 0 20px 15px rgba(0, 0, 0, 0.7);
   background-color: #000000;
   background-position: 85% bottom;
