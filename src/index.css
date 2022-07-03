@@ -1,13 +1,15 @@
 @import-normalize; /* bring in normalize.css styles */
 
 :root {
-  --color-text-primary: rgb(88, 88, 88);
-  --color-background-primary: rgb(239, 241, 255);
-  --color-positive: #83d400;
-  --color-negative: #f85d03;
+  --color-text-primary: rgb(110, 110, 110);
+  --color-background-primary: rgb(12, 12, 14);
+  --color-positive: #72b900;
+  --color-negative: #c41d00;
 }
 
 body {
+  background-color: rgb(32, 32, 37);
+  box-sizing: border-box;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

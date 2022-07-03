@@ -19,7 +19,3 @@ export const Container = styled.div`
 export const Title = styled.h1`
   font-size: 40;
 `;
-
-export const Subtitle = styled.h2`
-  font-size: 30;
-`;

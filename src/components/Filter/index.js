@@ -1,1 +1,1 @@
-export { default } from './ContactForm';
+export { Filter } from './Filter';
