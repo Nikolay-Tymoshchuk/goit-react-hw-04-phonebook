@@ -14,30 +14,12 @@ export const Field = styled.input`
   font-size: 1em;
 
   &:focus {
-    outline: none;
+    outline: 2px solid var(--color-accent);
   }
 `;
 
 export const Button = styled.button`
-  /* cursor: pointer;
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  height: 30px;
-  text-transform: uppercase;
-  letter-spacing: 0em;
-  transition: 300ms ease-in-out;
-  border-radius: 2px;
-  border: 1px solid #fff;
-
-  &:hover {
-    letter-spacing: 0.1em;
-    transition: 300ms ease-in-out;
-    background-color: inherit;
-    color: #fff;
-  } */
   margin-top: 10px;
-  display: inline-block;
   transform: scaleX(0.9);
   cursor: pointer;
   position: relative;
@@ -55,7 +37,7 @@ export const Button = styled.button`
     border: 1px solid #fff;
     outline: none;
     letter-spacing: 0.25em;
-    background: inherit;
+    background: var(--color-accent);
     color: #fff;
     box-shadow: 0 0 20px #fff;
     transform: scaleX(1);
@@ -82,7 +64,7 @@ export const Button = styled.button`
       content: '';
       position: absolute;
       left: 80%;
-      top: -3px;
+      top: -4px;
       width: 10px;
       height: 5px;
       border: 2px solid #000;
@@ -95,7 +77,7 @@ export const Button = styled.button`
       content: '';
       position: absolute;
       left: 20%;
-      bottom: -3.5px;
+      bottom: -4px;
       width: 10px;
       height: 5px;
       border: 2px solid #000;
@@ -106,18 +88,16 @@ export const Button = styled.button`
   }
 
   &:hover i:before {
-    border: 2px solid #fff;
-    background: #000;
-    width: 20px;
+    border-color: #fff;
+    background: var(--color-accent);
     left: 20%;
-    transform: translateX(-10px);
+    transform: scaleX(2);
   }
 
   &:hover i:after {
-    border: 2px solid #fff;
-    background: #000;
-    width: 20px;
+    border-color: #fff;
+    background: var(--color-accent);
     left: 80%;
-    transform: translateX(-10px);
+    transform: scaleX(2);
   }
 `;

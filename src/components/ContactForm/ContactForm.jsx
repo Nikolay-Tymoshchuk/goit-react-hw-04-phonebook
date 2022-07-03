@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Form, Field, Button } from './ContactForm.styled';
 
 import { Component } from 'react';
@@ -24,6 +25,10 @@ export class ContactForm extends Component {
     const id = nanoid();
     const { name, number } = this.state;
     const { onSubmit } = this.props;
+    if (name === '' || number === '') {
+      Notify.failure('Name and number are required');
+      return;
+    }
     onSubmit({ id, name, number });
     this.setState({
       name: '',
@@ -42,6 +47,9 @@ export class ContactForm extends Component {
           value={name}
           onChange={this.handleChange}
           id={this.nameInputIdGenerate}
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          required
         />
         <label htmlFor={this.numberInputIdGenerate}>Number:</label>
         <Field
@@ -50,6 +58,9 @@ export class ContactForm extends Component {
           value={number}
           onChange={this.handleChange}
           id={this.numberInputIdGenerate}
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          required
         />
         <Button type="submit">
           <span>add contact</span>
