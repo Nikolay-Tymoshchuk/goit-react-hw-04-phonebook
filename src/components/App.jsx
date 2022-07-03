@@ -40,7 +40,6 @@ export class App extends Component {
 
   removeContact = e => {
     const id = e.target.closest('li').id;
-    console.log(id);
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== id),
     }));

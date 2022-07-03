@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
+import { Form, Field, Button } from './ContactForm.styled';
 
 import { Component } from 'react';
 
@@ -33,29 +34,28 @@ export class ContactForm extends Component {
   render() {
     const { name, number } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit}>
         <label htmlFor={this.nameInputIdGenerate}>Name:</label>
-        <br />
-        <input
+        <Field
           type="text"
           name="name"
           value={name}
           onChange={this.handleChange}
           id={this.nameInputIdGenerate}
         />
-        <br />
         <label htmlFor={this.numberInputIdGenerate}>Number:</label>
-        <br />
-        <input
+        <Field
           type="text"
           name="number"
           value={number}
           onChange={this.handleChange}
           id={this.numberInputIdGenerate}
         />
-        <br />
-        <button type="submit">Add contact</button>
-      </form>
+        <Button type="submit">
+          <span>add contact</span>
+          <i></i>
+        </Button>
+      </Form>
     );
   }
 }
