@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Form, Field, Button } from './ContactForm.styled';
 
 import { Component } from 'react';
@@ -25,10 +24,6 @@ export class ContactForm extends Component {
     const id = nanoid();
     const { name, number } = this.state;
     const { onSubmit } = this.props;
-    if (name === '' || number === '') {
-      Notify.failure('Name and number are required');
-      return;
-    }
     onSubmit({ id, name, number });
     this.setState({
       name: '',
