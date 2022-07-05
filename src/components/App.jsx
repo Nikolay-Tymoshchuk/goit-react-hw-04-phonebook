@@ -1,4 +1,5 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { nanoid } from 'nanoid';
 import { Component } from 'react';
 import { Container, Title } from './App.styled';
 import { ContactForm } from './ContactForm';
@@ -28,6 +29,7 @@ export class App extends Component {
       Notify.failure('Contact already exists');
       return;
     }
+    contact.id = nanoid();
     this.setState(prevState => ({
       contacts: [...prevState.contacts, contact],
     }));
@@ -38,8 +40,7 @@ export class App extends Component {
     this.setState({ filter: e.target.value });
   };
 
-  removeContact = e => {
-    const id = e.target.closest('li').id;
+  removeContact = id => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== id),
     }));
