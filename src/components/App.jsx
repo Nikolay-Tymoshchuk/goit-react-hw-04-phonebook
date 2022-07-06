@@ -18,7 +18,6 @@ export class App extends Component {
   };
 
   contactCreate = contact => {
-    const { contacts } = this.state;
     this.setState(prevState => ({
       contacts: [...prevState.contacts, contact],
     }));
