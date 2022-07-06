@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import { Form, Field, Button } from './ContactForm.styled';
@@ -21,8 +23,15 @@ export class ContactForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { onSubmit } = this.props;
-    onSubmit({ ...this.state });
+    const { onSubmit, contacts } = this.props;
+    const { name } = this.state;
+    if (contacts.find(item => item.name.toLowerCase() === name.toLowerCase())) {
+      toast.error(`Contact ${name} is already exist`);
+      return;
+    }
+    const id = nanoid();
+    onSubmit({ ...this.state, id });
+    toast.success(`Contact ${name} has been added`);
     this.setState({
       name: '',
       number: '',
