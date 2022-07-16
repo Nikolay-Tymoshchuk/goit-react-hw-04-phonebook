@@ -1,62 +1,61 @@
+import { useState, useEffect, useRef } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Component } from 'react';
 import { Container, Title } from './App.styled';
 import { ContactForm } from './ContactForm';
 import { ContactList } from './ContactList';
 import { Filter } from './Filter';
 
-export class App extends Component {
-  state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
-    filter: '',
+export function App() {
+  const [contacts, setContacts] = useState([]);
+  const [filter, setFilter] = useState('');
+  const isFirstLoad = useRef(true);
+
+  useEffect(() => {
+    if (isFirstLoad.current) {
+      const contactsFromLocalStorage = localStorage.getItem('contacts');
+      if (contactsFromLocalStorage) {
+        setContacts(JSON.parse(contactsFromLocalStorage));
+      }
+      isFirstLoad.current = false;
+      return;
+    }
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
+
+  const contactCreate = contact => {
+    setContacts([...contacts, contact]);
   };
 
-  contactCreate = contact => {
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, contact],
-    }));
+  const handleFilterChange = e => {
+    setFilter(e.target.value);
   };
 
-  handleFilterChange = e => {
-    this.setState({ filter: e.target.value });
+  const removeContact = id => {
+    setContacts(contacts.filter(contact => contact.id !== id));
   };
 
-  removeContact = id => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== id),
-    }));
-  };
+  const normalizedContacts = filter.toLowerCase();
 
-  render() {
-    const normalizedContacts = this.state.filter.toLowerCase();
+  const filteredContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(normalizedContacts)
+  );
 
-    const filteredContacts = this.state.contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedContacts)
-    );
-
-    const { contacts, filter } = this.state;
-    return (
-      <Container>
-        <Title>Phonebook</Title>
-        <ContactForm onSubmit={this.contactCreate} contacts={contacts} />
-        <ToastContainer
-          position="top-left"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          rtl={false}
-          theme={'dark'}
-        />
-        <Title>Contacts</Title>
-        <Filter value={filter} onChange={this.handleFilterChange} />
-        <ContactList data={filteredContacts} onClick={this.removeContact} />
-      </Container>
-    );
-  }
+  return (
+    <Container>
+      <Title>Phonebook</Title>
+      <ContactForm onSubmit={contactCreate} contacts={contacts} />
+      <ToastContainer
+        position="top-left"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        rtl={false}
+        theme={'dark'}
+      />
+      <Title>Contacts</Title>
+      <Filter value={filter} onChange={handleFilterChange} />
+      <ContactList data={filteredContacts} onClick={removeContact} />
+    </Container>
+  );
 }
